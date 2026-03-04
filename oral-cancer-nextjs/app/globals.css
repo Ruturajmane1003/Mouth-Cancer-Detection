@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #060918;
+  --card: #111827;
+  --border: rgba(148, 163, 184, 0.16);
+  --text: #e5edf7;
+  --muted: #9ca3af;
+  --primary: #22c1dc;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #60a5fa;
+  --cancer: #ef4444;
+  --normal: #22c55e;
+  --font-inter: var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: var(--font-inter);
+}
+
+/* Dark gradient background: navy to deep blue, slightly lighter */
+.gradient-bg {
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.22), transparent 60%),
+    linear-gradient(165deg, #020617 0%, #071525 32%, #0b1734 68%, #020617 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Animated grid pattern */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: 0 0, 0 0;
+}
+
+/* Glowing orb in hero */
+.hero-orb {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.12) 0%,
+    rgba(59, 130, 246, 0.06) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* Global blurred layer behind content */
+.page-blur-layer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.65), transparent 60%),
+    radial-gradient(circle at bottom, rgba(15, 23, 42, 0.7), transparent 60%);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 1rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+}
+
+/* Animated gradient border wrapper */
+.gradient-border-wrap {
+  position: relative;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.4), rgba(59, 130, 246, 0.2), rgba(34, 211, 238, 0.2));
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+.gradient-border-wrap .inner {
+  border-radius: calc(1rem - 1px);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  min-height: 100%;
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Gradient divider line */
+.divider-gradient {
+  height: 1px;
+  margin: 2.5rem 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(34, 211, 238, 0.2) 20%,
+    rgba(59, 130, 246, 0.3) 50%,
+    rgba(34, 211, 238, 0.2) 80%,
+    transparent 100%
+  );
+}
+
+/* Gradient text for main heading */
+.gradient-text {
+  background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 40%, #22d3ee 70%, #e2e8f0 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@layer utilities {
+  .section-divider {
+    @apply border-t border-slate-700/60 my-8;
+  }
+}
