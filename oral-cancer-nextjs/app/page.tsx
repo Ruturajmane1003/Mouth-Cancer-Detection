@@ -12,7 +12,9 @@ import {
   Cell,
 } from "recharts";
 
-const API_BASE = process.env.NEXT_PUBLIC_PREDICT_API || "http://localhost:5001";
+const API_BASE =
+  process.env.NEXT_PUBLIC_PREDICT_API ||
+  "https://ruturajmane-oral-cancer-api.hf.space";
 
 type PredictionResult = {
   detected_class: string;
@@ -58,16 +60,27 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setResult(null);
+  
     try {
       const formData = new FormData();
       formData.append("file", file);
+  
       const res = await fetch(`${API_BASE}/predict`, {
         method: "POST",
         body: formData,
       });
+
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        throw new Error(
+          `API returned non-JSON response (${res.status}). Check Hugging Face Space logs.`
+        );
+      }
+
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Prediction failed");
       setResult(data);
+  
     } catch (err) {
       setError(err instanceof Error ? err.message : "Prediction failed");
     } finally {
